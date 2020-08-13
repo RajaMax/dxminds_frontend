@@ -1,0 +1,40 @@
+<div *ngIf="companyData">
+  <table>
+    <tr>
+      <td>Company Name</td>
+      <td>{{companyData.name}}{{companyData._id}}</td>
+    </tr>
+    <tr>
+      <td>Addrss</td>
+      <td>{{companyData.address}}</td>
+    </tr>
+    <tr>
+      <td>Type</td>
+      <td>{{companyData.type}}</td>
+    </tr>
+  </table>
+  <button><a routerLink="/employee/{{companyData._id}}"> Add Employee</a></button>
+</div>
+<form *ngIf="!companyData" [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)">
+  <label for="name">Company Name</label><br>
+  <input id="name" class="form-control" formControlName="name" required>
+  <div *ngIf="name.errors?.required">
+    Name is required.
+  </div>
+  <br>
+  <label>Company Address :</label><br>
+  <input id="address" class="form-control" formControlName="address" required>
+  <div *ngIf="address.errors?.required">
+    Address is required.
+  </div>
+  <br>
+  <label>Type :</label><br>
+  <input id="type" class="form-control" formControlName="type" required>
+  <div *ngIf="type.errors?.required">
+    type is required.
+  </div>
+  <br>
+  <button type="submit" [disabled]="myForm.invalid">
+    Send
+  </button>
+</form>

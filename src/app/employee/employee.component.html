@@ -1,0 +1,44 @@
+<form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)">
+  <div>
+    <input type="file" name="profile" (change)="onFileSelect($event)" />
+  </div>
+  <label for="name">Employee Name</label><br>
+  <input id="name" class="form-control" formControlName="name" required>
+  <div *ngIf="name.errors?.required">
+    Name is required.
+  </div>
+  <br>
+  <label>Employee Address :</label><br>
+  <input id="address" class="form-control" formControlName="address" required>
+  <div *ngIf="address.errors?.required">
+    Address is required.
+  </div>
+  <br>
+  <label>phone_number :</label><br>
+  <input id="phone_number" class="form-control" formControlName="phone_number" required>
+  <div *ngIf="phone_number.errors?.required">
+    type is required.
+  </div>
+  <br>
+  <button type="submit" [disabled]="myForm.invalid">
+    Send
+  </button>
+</form>
+<table *ngIf='employess.length>0' >
+  <thead>
+    <tr>
+      <th>Photo</th>
+      <th>Name</th>
+      <th>Address</th>
+      <th>Phone Number</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr *ngFor='let data of employess'>
+          <td><img src='{{apiEndpoint}}{{data.image}}'>{{apiEndpoint}}{{data.image}}</td>
+          <td>{{data.name}}</td>
+          <td>{{data.address}}</td>
+          <td>{{data.phone_number}}</td>
+      </tr>
+  </tbody>
+  </table>
